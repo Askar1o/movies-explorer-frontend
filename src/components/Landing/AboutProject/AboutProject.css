@@ -1,0 +1,142 @@
+.about {
+  padding: 107px 70px;
+}
+
+.about__info-list {
+  margin: 0;
+  list-style: none;
+  padding: 70px 0 0;
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 40px;
+}
+
+.about__info-element {
+  display: flex;
+  flex-direction: column;
+  max-width: 550px;
+  gap: 26px;
+}
+
+.about__info-title {
+  margin: 0;
+  padding: 0;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: -0.8px;
+}
+
+.about__info-text {
+  margin: 0;
+  padding: 0;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.about__timeline {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  padding-top: 110px;
+  gap: 14px 0;
+}
+
+.about__timeline-title {
+  margin: 0;
+  padding: 0;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  height: 36px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg-duration);
+}
+
+.about__timeline-title_type_left {
+  color: var(--color-inverted-main);
+  background-color: var(--bg-inverted-color-main);
+}
+
+.about__timeline-text {
+  margin: 0;
+  padding: 0;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  width: 100%;
+  text-align: center;
+  color: var(--color-additional);
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .about {
+    padding: 87px 50px;
+  }
+
+  .about__info-list {
+    gap: 30px;
+  }
+
+  .about__info-element {
+    max-width: 319px;
+    gap: 22px;
+  }
+
+  .about__info-text {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .about__timeline {
+    padding-top: 93px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .about {
+    padding: 66px 18px;
+  }
+
+  .about__info-list {
+    grid-template-columns: auto;
+    justify-content: center;
+    gap: 56px;
+    padding: 60px 0 0;
+  }
+
+  .about__info-element {
+    gap: 16px;
+    max-width: 284px;
+  }
+
+  .about__info-title {
+    font-size: 18px;
+    line-height: 22px;
+    letter-spacing: -0.72px;
+  }
+
+  .about__info-text {
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  .about__timeline {
+    grid-template-columns: minmax(100px, 1fr) 4fr;
+    padding-top: 60px;
+    gap: 10px 0;
+  }
+
+  .about__timeline-title {
+    font-size: 11px;
+    line-height: 13px;
+  }
+
+  .about__timeline-text {
+    font-size: 11px;
+    line-height: 13px;
+  }
+}

@@ -1,0 +1,33 @@
+@import url(./vendor/normalize.css);
+@import url(./vendor/fonts/font.css);
+
+:root {
+  --color-main: #fff;
+  --color-inverted-main: #000;
+  --color-additional: #8B8B8B;
+
+  --bg-color-main: #202020;
+  --bg-inverted-color-main: #3ddc84;
+  --bg-promo: #272727;
+  --bg-nav-link: #303030;
+  --bg-duration: #303030;
+}
+
+.root {
+  background-color: var(--bg-color-main);
+  color: var(--color-main);
+  min-height: 100vh;
+  font-family: "Inter", Arial, sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+}
+
+.page {
+  margin: 0 auto;
+  padding: 0;
+  max-width: 1280px;
+}
