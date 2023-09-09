@@ -9,8 +9,10 @@ function Main() {
   return (
     <>
       <Header />
-      <MovieSearch />
-      <MovieList />
+      <main>
+        <MovieSearch />
+        <MovieList />
+      </main>
       <Footer />
     </>
   );

@@ -5,7 +5,11 @@ function MovieSearch() {
   return (
     <form className="search">
       <div className="search__input-container">
-        <input type="text" className="search__input" placeholder="Фильм" />
+        <input
+          type="text"
+          className="search__input"
+          placeholder="Фильм"
+        />
         <button className="search__input-button" />
       </div>
       <label className="search__label">

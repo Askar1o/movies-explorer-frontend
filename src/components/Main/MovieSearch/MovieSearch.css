@@ -27,6 +27,7 @@
   background-size: cover;
   border: none;
   padding: 22px 22px;
+  cursor: pointer;
 }
 
 .search__label {
@@ -86,6 +87,12 @@
   background-color: #f5f5f5;
   transition: 0.3s;
   left: 2px;
+}
+
+@media (pointer: fine) {
+  .search__input-button:hover {
+    opacity: 0.8;
+  }
 }
 
 @media screen and (max-width: 820px) {
