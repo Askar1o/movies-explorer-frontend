@@ -1,0 +1,23 @@
+.header__burger-button {
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+  margin-left: auto;
+  background: url(../../images/burger.svg) no-repeat center;
+}
+
+@media (pointer: fine) {
+  .header__burger-button:hover {
+    opacity: 0.8;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .header__burger-button {
+    background-size: 40px 43px;
+    width: 40px;
+    height: 43px;
+  }
+}

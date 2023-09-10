@@ -1,0 +1,124 @@
+.search {
+  padding: 76px 70px 10px;
+}
+
+.search__input-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: center;
+}
+
+.search__input {
+  width: 100%;
+  margin: 0;
+  padding: 16px 20px;
+  border-radius: 8px;
+  border: none;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  color: var(--color-additional);
+  background-color: #2f2f2f;
+}
+
+.search__input-button {
+  background: url(../../../images/movies-button.svg) no-repeat;
+  background-size: cover;
+  border: none;
+  padding: 22px 22px;
+  cursor: pointer;
+}
+
+.search__label {
+  cursor: pointer;
+}
+
+.search__label-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding-top: 29px;
+  position: relative;
+  border-bottom: 1px solid #424242;
+  padding-bottom: 40px;
+}
+
+.search__checkbox-input {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  position: absolute;
+}
+
+.search__checkbox-span {
+  width: 35px;
+  height: 14px;
+  border-radius: 20px;
+  background-color: var(--bg-inverted-color-main);
+  position: relative;
+}
+
+.search__checkbox-span::before {
+  position: absolute;
+  top: 2px;
+  left: 22px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background-color: var(--color-main);
+  content: "";
+  transition: 0.3s;
+}
+
+.search__checkbox-text {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+  margin: 0;
+}
+
+.search__checkbox-input:checked ~ .search__checkbox-span {
+  background-color: #ebebeb;
+}
+
+.search__checkbox-input:checked ~ .search__checkbox-span::before {
+  background-color: #f5f5f5;
+  transition: 0.3s;
+  left: 2px;
+}
+
+@media (pointer: fine) {
+  .search__input-button:hover {
+    opacity: 0.8;
+  }
+}
+
+@media screen and (max-width: 820px) {
+  .search {
+    padding: 74px 30px 10px;
+  }
+
+  .search__label-container {
+    padding-top: 41px;
+  }
+}
+
+@media screen and (max-width: 620px) {
+  .search {
+    padding: 74px 14px 10px;
+  }
+
+  .search__label-container {
+    padding-top: 47px;
+  }
+
+  .search__checkbox-text {
+    font-size: 11px;
+  }
+
+  .search__input {
+    padding: 13px;
+  }
+}
