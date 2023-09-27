@@ -1,25 +1,48 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./Profile.css";
 import Header from "../Header/Header";
 import useFormAndValidation from "../../hooks/FormValidation/useFormValidation";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext/CurrentUserContext";
+import { ApiServiceContext } from "../../contexts/ApiServiceContext/ApiServiceContext";
+import Preloader from "../Preloader/Preloader";
 
-function Profile({ onLogout }) {
-  const [currentUser, setCurrentUser] = useState({
-    name: "Виталий",
-    email: "pochta@yandex.ru",
-  });
+function Profile({ onLogout, onSubmit }) {
+  const currentUser = useContext(CurrentUserContext);
 
-  const { values, errors, isValid, handleChange } = useFormAndValidation({
-    name: currentUser.name,
-    email: currentUser.email,
-  });
+  const { values, errors, isValid, handleChange, setValues, setValid } =
+    useFormAndValidation({
+      name: currentUser.name,
+      email: currentUser.email,
+    });
 
-  const [serverResError, setServerResError] = useState(false);
+  const { isLoading, isError, text } = useContext(ApiServiceContext);
   const [isShowSaveButton, setShowSaveButton] = useState(false);
+
+  useEffect(() => {
+    setValues((data) => ({
+      ...data,
+      name: currentUser.name,
+      email: currentUser.email,
+    }));
+  }, [currentUser, setValues]);
+
+  useEffect(() => {
+    if (
+      currentUser.name === values.name &&
+      currentUser.email === values.email
+    ) {
+      setValid(false);
+    }
+  }, [currentUser, values, setValid]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setServerResError(true);
+    onSubmit({ name: values.name, email: values.email });
+    if (errors && isError) {
+      setShowSaveButton(true);
+    } else {
+      setShowSaveButton(false);
+    }
   };
 
   const handleEditButtonClick = () => {
@@ -43,6 +66,7 @@ function Profile({ onLogout }) {
               value={values.name}
               minLength={2}
               maxLength={30}
+              disabled={isLoading}
               required
             />
           </label>
@@ -56,14 +80,14 @@ function Profile({ onLogout }) {
               onChange={handleChange}
               onFocus={handleEditButtonClick}
               value={values.email}
+              disabled={isLoading}
               required
             />
           </label>
           <span className="profile__span-error">{errors.email}</span>
-          <p className="profile__response-error">
-            {serverResError && "При обновлении профиля произошла ошибка."}
-          </p>
-          {isShowSaveButton ? (
+          <p className="profile__response-error">{isError && text}</p>
+          {isLoading && <Preloader />}
+          {isShowSaveButton && !isLoading && (
             <button
               type="submit"
               className="profile__button profile__button_type_submit"
@@ -71,7 +95,8 @@ function Profile({ onLogout }) {
             >
               Сохранить
             </button>
-          ) : (
+          )}
+          {!isShowSaveButton && !isLoading && (
             <>
               <button
                 type="button"

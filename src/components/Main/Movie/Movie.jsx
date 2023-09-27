@@ -3,20 +3,32 @@ import "./Movie.css";
 import { useLocation } from "react-router-dom";
 
 function Movie(props) {
-  const { name, duration, saved, link } = props;
+  const { name, duration, saved, link, movieData, onSave, onDelete } = props;
   const location = useLocation();
 
   return (
     <li className="movie">
       <div className="movie__heading-container">
-        {location.pathname === "/movies" ? (
-          saved ? (
-            <button className="movie__saved-button movie__saved-button_active" />
-          ) : (
-            <button className="movie__saved-button">Сохранить</button>
-          )
-        ) : (
-          <button type="button" className="movie__delete-button" />
+        {location.pathname === "/movies" && saved && (
+          <button
+            className="movie__saved-button movie__saved-button_active"
+            onClick={() => onDelete(movieData._id)}
+          />
+        )}
+        {location.pathname === "/movies" && !saved && (
+          <button
+            className="movie__saved-button"
+            onClick={() => onSave(movieData)}
+          >
+            Сохранить
+          </button>
+        )}
+        {location.pathname === "/saved-movies" && (
+          <button
+            type="button"
+            className="movie__delete-button"
+            onClick={() => onDelete(movieData._id)}
+          />
         )}
         <img src={link} alt={name} className="movie__image" />
         <div className="movie__heading">

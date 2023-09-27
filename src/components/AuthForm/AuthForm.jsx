@@ -8,11 +8,14 @@ function AuthForm({ onLogin, onRegister, isRegForm }) {
   const { values, errors, isValid, handleChange, resetForm } =
     useFormAndValidation();
   const [serverResError, setServerResError] = useState(false);
+  const { name, email, password } = values;
 
   const handleSubmit = (e) => {
     e.preventDefault();
     resetForm();
-    isRegForm ? onRegister() : onLogin();
+    isRegForm
+      ? onRegister({ email, password, name })
+      : onLogin({ email, password });
   };
 
   return (
