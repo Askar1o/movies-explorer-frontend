@@ -1,21 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Movie.css";
 import { useLocation } from "react-router-dom";
 
 function Movie(props) {
   const { name, duration, saved, link, movieData, onSave, onDelete } = props;
   const location = useLocation();
+  const [isSaveMovie, setSaveMovie] = useState(false);
 
   return (
     <li className="movie">
       <div className="movie__heading-container">
-        {location.pathname === "/movies" && saved && (
+        {location.pathname === "/movies" && isSaveMovie && (
           <button
             className="movie__saved-button movie__saved-button_active"
             onClick={() => onDelete(movieData._id)}
           />
         )}
-        {location.pathname === "/movies" && !saved && (
+        {location.pathname === "/movies" && !isSaveMovie && (
           <button
             className="movie__saved-button"
             onClick={() => onSave(movieData)}

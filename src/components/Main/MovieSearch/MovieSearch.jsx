@@ -1,11 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import "./MovieSearch.css";
+import { LOCAL_STORAGE_LAST_SEARCH_QUERY } from "../../../utils/constant";
 
-function MovieSearch({ onSubmit }) {
+function MovieSearch({ onSubmit, isLoading }) {
+  const location = useLocation();
   const [searchQuery, setSearchQuery] = useState({
     searchString: "",
     isShortMovie: false,
   });
+
+  useEffect(() => {
+    if (
+      location.pathname === "/movies" &&
+      localStorage.getItem(LOCAL_STORAGE_LAST_SEARCH_QUERY)
+    ) {
+      const { searchString, isShortMovie } = JSON.parse(
+        localStorage.getItem(LOCAL_STORAGE_LAST_SEARCH_QUERY)
+      );
+      setSearchQuery({
+        searchString,
+        isShortMovie,
+      });
+    }
+  }, [location]);
 
   const handleChange = (e) => {
     setSearchQuery({ ...searchQuery, searchString: e.target.value });
@@ -13,10 +31,14 @@ function MovieSearch({ onSubmit }) {
 
   const handleChangeCheckbox = (e) => {
     setSearchQuery({ ...searchQuery, isShortMovie: e.target.checked });
+    onSubmit({ ...searchQuery, isShortMovie: e.target.checked });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!searchQuery.searchString.trim()) {
+      return setSearchQuery({ ...searchQuery, searchString: "" });
+    }
     onSubmit(searchQuery);
   };
 
@@ -29,6 +51,8 @@ function MovieSearch({ onSubmit }) {
           placeholder="Фильм"
           name="searchString"
           onChange={handleChange}
+          disabled={isLoading}
+          value={searchQuery.searchString}
         />
         <button className="search__input-button" type="submit" />
       </div>
@@ -39,6 +63,8 @@ function MovieSearch({ onSubmit }) {
             className="search__checkbox-input"
             name="isShortMovie"
             onChange={handleChangeCheckbox}
+            disabled={isLoading}
+            checked={searchQuery.isShortMovie}
           />
           <span className="search__checkbox-span"></span>
           <p className="search__checkbox-text">Короткометражки</p>

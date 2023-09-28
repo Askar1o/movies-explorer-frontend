@@ -80,7 +80,7 @@ class Api {
   }
 
   saveMovie({ ...data }) {
-    return this._request(`${this._baseUrl}/ movies`, {
+    return this._request(`${this._baseUrl}/movies`, {
       method: "POST",
       headers: this._headers,
       credentials: this._credentials,

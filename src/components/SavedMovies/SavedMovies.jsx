@@ -6,8 +6,10 @@ import Footer from "../Footer/Footer";
 import { useSearchFilms } from "../../hooks/FormValidation/SearchFilms/useSearchFilms";
 
 function SavedMovies({ movies, onDelete }) {
-  const { sortedMovies, handleSearch, isLoading, text } =
-    useSearchFilms(movies);
+  const { sortedMovies, handleSearch, isLoading, text } = useSearchFilms({
+    movies: movies,
+    isSavedPage: true,
+  });
 
   return (
     <>

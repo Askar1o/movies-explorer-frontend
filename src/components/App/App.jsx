@@ -175,7 +175,10 @@ function App() {
     api
       .saveMovie(movieData)
       .then((savedMovie) =>
-        setSavedMovies((movies) => [...movies, savedMovie.data])
+        setSavedMovies((movies) => {
+          console.log(movies);
+          return [...movies, savedMovie.data];
+        })
       )
       .catch((e) => console.error(e));
   };
