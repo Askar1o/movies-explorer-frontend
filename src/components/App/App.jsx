@@ -48,7 +48,7 @@ function App() {
         .catch((e) => console.error(e));
       api
         .getSavedMovies()
-        .then((movies) => setSavedMovies(movies.data))
+        .then((movies) => setSavedMovies(movies))
         .catch((e) => console.error(e));
     }
   }, [currentUser.isLoggedIn]);
@@ -177,7 +177,7 @@ function App() {
       .then((savedMovie) =>
         setSavedMovies((movies) => {
           console.log(movies);
-          return [...movies, savedMovie.data];
+          return [...movies, savedMovie];
         })
       )
       .catch((e) => console.error(e));

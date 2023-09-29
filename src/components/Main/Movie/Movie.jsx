@@ -10,13 +10,13 @@ function Movie(props) {
   return (
     <li className="movie">
       <div className="movie__heading-container">
-        {location.pathname === "/movies" && isSaveMovie && (
+        {location.pathname === "/movies" && saved && (
           <button
             className="movie__saved-button movie__saved-button_active"
             onClick={() => onDelete(movieData._id)}
           />
         )}
-        {location.pathname === "/movies" && !isSaveMovie && (
+        {location.pathname === "/movies" && !saved && (
           <button
             className="movie__saved-button"
             onClick={() => onSave(movieData)}

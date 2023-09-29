@@ -51,7 +51,7 @@ function MovieList({ movies, savedMovies, isLoading, text, onSave, onDelete }) {
     }, 300);
   };
 
-  /*const isSavedMovie = (movie) => {
+  const isSavedMovie = (movie) => {
     return savedMovies.reduce((acc, saved) => {
       if (saved.movieId === movie.id) {
         movie._id = saved._id;
@@ -59,7 +59,7 @@ function MovieList({ movies, savedMovies, isLoading, text, onSave, onDelete }) {
       }
       return acc;
     }, false);
-  };*/
+  };
 
   const getImageLink = (movie) => {
     return movie.movieId ? movie.image : BEAT_API_URL + movie.image.url;
@@ -78,7 +78,7 @@ function MovieList({ movies, savedMovies, isLoading, text, onSave, onDelete }) {
             name={film.nameRU}
             duration={film.duration}
             link={getImageLink(film)}
-            //saved={isSavedMovie(film)}
+            saved={isSavedMovie(film)}
             movieData={film}
             onSave={onSave}
             onDelete={onDelete}
