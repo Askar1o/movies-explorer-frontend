@@ -140,9 +140,17 @@ function App() {
           name: userData.data.name,
           email: userData.data.email,
         });
+        setApiService((past) => ({
+          ...past,
+          successText: `Данные обновлены.`,
+        }));
       })
       .catch((err) => handleError(err))
       .finally(() => disableLoader());
+  };
+
+  const handleSearchError = () => {
+    handleError("Для поиска фильма нужно ввести букву");
   };
 
   const handleLogout = () => {
@@ -231,6 +239,7 @@ function App() {
                       savedMovies={savedMovies}
                       onSave={handleClickSaveMovie}
                       onDelete={handleClickDeleteMovie}
+                      onError={handleSearchError}
                     />
                   }
                 />
@@ -240,6 +249,7 @@ function App() {
                     <SavedMovies
                       movies={savedMovies}
                       onDelete={handleClickDeleteMovie}
+                      onError={handleSearchError}
                     />
                   }
                 />

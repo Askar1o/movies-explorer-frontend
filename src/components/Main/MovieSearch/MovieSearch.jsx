@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import "./MovieSearch.css";
 import { LOCAL_STORAGE_LAST_SEARCH_QUERY } from "../../../utils/constant";
 
-function MovieSearch({ onSubmit, isLoading }) {
+function MovieSearch({ onSubmit, isLoading, onError }) {
   const location = useLocation();
   const [searchQuery, setSearchQuery] = useState({
     searchString: "",
@@ -30,6 +30,10 @@ function MovieSearch({ onSubmit, isLoading }) {
   };
 
   const handleChangeCheckbox = (e) => {
+    if (!searchQuery.searchString.trim()) {
+      onError();
+      return setSearchQuery({ ...searchQuery, searchString: "" });
+    }
     setSearchQuery({ ...searchQuery, isShortMovie: e.target.checked });
     onSubmit({ ...searchQuery, isShortMovie: e.target.checked });
   };
@@ -37,6 +41,7 @@ function MovieSearch({ onSubmit, isLoading }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!searchQuery.searchString.trim()) {
+      onError();
       return setSearchQuery({ ...searchQuery, searchString: "" });
     }
     onSubmit(searchQuery);

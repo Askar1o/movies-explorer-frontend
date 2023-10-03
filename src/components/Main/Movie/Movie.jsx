@@ -1,11 +1,16 @@
 import React, { useState } from "react";
 import "./Movie.css";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 function Movie(props) {
   const { name, duration, saved, link, movieData, onSave, onDelete } = props;
   const location = useLocation();
-  const [isSaveMovie, setSaveMovie] = useState(false);
+
+  const calculateDuration = () => {
+    const hours = Math.floor(duration / 60);
+    const minutes = Math.floor(duration % 60);
+    return `${hours > 0 ? hours + "ч" : ""} ${minutes + "м"}`;
+  };
 
   return (
     <li className="movie">
@@ -31,10 +36,16 @@ function Movie(props) {
             onClick={() => onDelete(movieData._id)}
           />
         )}
-        <img src={link} alt={name} className="movie__image" />
+        <Link
+          to={movieData.trailerLink}
+          target="blank"
+          className="movie__trailer-link"
+        >
+          <img src={link} alt={name} className="movie__image" />
+        </Link>
         <div className="movie__heading">
           <h1 className="movie__name">{name}</h1>
-          <p className="movie__duration">{duration}</p>
+          <p className="movie__duration">{calculateDuration(duration)}</p>
         </div>
       </div>
     </li>

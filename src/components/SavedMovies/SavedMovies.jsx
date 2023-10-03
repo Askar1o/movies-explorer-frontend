@@ -5,7 +5,7 @@ import MovieList from "../Main/MovieList/MovieList";
 import Footer from "../Footer/Footer";
 import { useSearchFilms } from "../../hooks/FormValidation/SearchFilms/useSearchFilms";
 
-function SavedMovies({ movies, onDelete }) {
+function SavedMovies({ movies, onDelete, onError }) {
   const { sortedMovies, handleSearch, isLoading, text } = useSearchFilms({
     movies: movies,
     isSavedPage: true,
@@ -15,7 +15,7 @@ function SavedMovies({ movies, onDelete }) {
     <>
       <Header />
       <main>
-        <MovieSearch onSubmit={handleSearch} />
+        <MovieSearch onSubmit={handleSearch} onError={onError} />
         <MovieList
           movies={sortedMovies}
           savedMovies={sortedMovies}

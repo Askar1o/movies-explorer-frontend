@@ -54,7 +54,12 @@ function Profile({ onLogout, onSubmit }) {
       <Header />
       <section className="profile">
         <h2 className="profile__title">Привет, {currentUser.name}!</h2>
-        <form className="profile__form" name="profile" onSubmit={handleSubmit}>
+        <form
+          className="profile__form"
+          name="profile"
+          onSubmit={handleSubmit}
+          noValidate
+        >
           <label className="profile__label">
             <span className="profile__input-title">Имя</span>
             <input

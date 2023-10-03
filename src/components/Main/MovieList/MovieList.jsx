@@ -6,6 +6,7 @@ import { DeviceContext } from "../../../contexts/DeviceContext/DeviceContext";
 import { useContext, useEffect, useState } from "react";
 import Preloader from "../../Preloader/Preloader";
 import { BEAT_API_URL } from "../../../utils/constant";
+import SearchMessage from "../SearchMessage/SearchMessage";
 
 function MovieList({ movies, savedMovies, isLoading, text, onSave, onDelete }) {
   const device = useContext(DeviceContext);
@@ -85,13 +86,14 @@ function MovieList({ movies, savedMovies, isLoading, text, onSave, onDelete }) {
           />
         );
       });
-    } else {
+    } /*else {
       return text;
-    }
+    }*/
   };
 
   return (
     <main className="movies">
+      {movies.length === 0 && <SearchMessage>{text}</SearchMessage>}
       <ul className="movies__list">
         {isLoading ? <Preloader /> : renderMovies(renderCount)}
       </ul>
