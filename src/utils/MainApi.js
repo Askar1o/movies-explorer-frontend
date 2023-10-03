@@ -2,7 +2,7 @@ import { apiConfig } from "./utils";
 
 class Api {
   constructor({ headers, credentials }) {
-    this._baseUrl = "https://askario.diplom.nomoredomainsrocks.ru";
+    this._baseUrl = "https://api.askario.diplom.nomoredomainsrocks.ru";
     this._headers = headers;
     this._credentials = credentials;
   }
