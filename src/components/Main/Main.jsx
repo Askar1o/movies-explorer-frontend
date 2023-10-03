@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Main.css";
 import Header from "../Header/Header";
 import MovieSearch from "./MovieSearch/MovieSearch";
