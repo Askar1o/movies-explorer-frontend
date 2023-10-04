@@ -8,7 +8,7 @@ export const apiConfig = {
 
 export const createData = (data, query) => {
   const { searchString, isShortMovie } = query;
-  const regExpForNonWordSymbols = /[ !,.\-'";:`{}(%«»]/g;
+  const regExpForNonWordSymbols = /[!,.\-'";:`{}(%«»]/g;
   if (isShortMovie) {
     return data.filter(
       (movie) =>
