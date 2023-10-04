@@ -15,7 +15,8 @@ function Profile({ onLogout, onSubmit }) {
       email: currentUser.email,
     });
 
-  const { isLoading, isError, text } = useContext(ApiServiceContext);
+  const { isLoading, isError, text, successText } =
+    useContext(ApiServiceContext);
   const [isShowSaveButton, setShowSaveButton] = useState(false);
 
   useEffect(() => {
@@ -93,7 +94,9 @@ function Profile({ onLogout, onSubmit }) {
             />
           </label>
           <span className="profile__span-error">{errors.email}</span>
-          <p className="profile__response-error">{isError && text}</p>
+          <p className="profile__response-error">
+            {isError ? text : successText}
+          </p>
           {isLoading && <Preloader />}
           {isShowSaveButton && !isLoading && (
             <button
