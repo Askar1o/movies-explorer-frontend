@@ -86,6 +86,9 @@ function Profile({ onLogout, onSubmit }) {
               onFocus={handleEditButtonClick}
               value={values.email}
               disabled={isLoading}
+              pattern={
+                "^[A-Za-z0-9\\._%\\+\\-]+@([A-Za-z0-9\\-]+\\.)+[A-Za-z]{2,}$"
+              }
               required
             />
           </label>

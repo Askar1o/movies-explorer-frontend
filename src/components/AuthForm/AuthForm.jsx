@@ -37,6 +37,7 @@ function AuthForm({ onLogin, onRegister, isRegForm }) {
         handleChange={handleChange}
         values={values}
         errors={errors}
+        pattern={"^[A-Za-z0-9\\._%\\+\\-]+@([A-Za-z0-9\\-]+\\.)+[A-Za-z]{2,}$"}
       />
       <Label
         title="Пароль"

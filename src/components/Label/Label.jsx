@@ -9,6 +9,7 @@ function Label({
   errors,
   minLength,
   maxLength,
+  pattern
 }) {
   return (
     <label className="label">
@@ -23,6 +24,7 @@ function Label({
         minLength={minLength || null}
         maxLength={maxLength || null}
         autoComplete={name}
+        pattern={pattern}
         required
       />
       <span className="label__span-error">{errors[`${name}`]}</span>
