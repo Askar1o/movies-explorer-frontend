@@ -64,6 +64,16 @@
   line-height: 12px;
 }
 
+.profile__success-message {
+  padding: 0;
+  margin: 0;
+  margin-top: 10px;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 13px;
+  text-align: center;
+}
+
 .profile__response-error {
   padding: 0;
   color: #ee3465;
@@ -71,7 +81,7 @@
   font-weight: 400;
   line-height: 13px;
   text-align: center;
-  margin: 185px 0 20px;
+  margin: 165px 0 20px;
 }
 
 .profile__button {
@@ -127,7 +137,7 @@
   }
 
   .profile__response-error {
-    margin: 175px 0 20px;
+    margin: 155px 0 20px;
   }
 }
 
@@ -142,7 +152,7 @@
   }
 
   .profile__response-error {
-    margin: 343px 0 20px;
+    margin: 323px 0 20px;
   }
 
   .profile__button {

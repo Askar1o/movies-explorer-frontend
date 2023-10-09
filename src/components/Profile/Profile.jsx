@@ -6,7 +6,7 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext/CurrentUse
 import { ApiServiceContext } from "../../contexts/ApiServiceContext/ApiServiceContext";
 import Preloader from "../Preloader/Preloader";
 
-function Profile({ onLogout, onSubmit }) {
+function Profile({ onLogout, onSubmit, isSuccessMessageShow }) {
   const currentUser = useContext(CurrentUserContext);
 
   const { values, errors, isValid, handleChange, setValues, setValid } =
@@ -15,8 +15,7 @@ function Profile({ onLogout, onSubmit }) {
       email: currentUser.email,
     });
 
-  const { isLoading, isError, text, successText } =
-    useContext(ApiServiceContext);
+  const { isLoading, isError, text } = useContext(ApiServiceContext);
   const [isShowSaveButton, setShowSaveButton] = useState(false);
 
   useEffect(() => {
@@ -94,6 +93,9 @@ function Profile({ onLogout, onSubmit }) {
             />
           </label>
           <span className="profile__span-error">{errors.email}</span>
+          <p className="profile__success-message">
+            {isSuccessMessageShow && "Данные обновлены!"}
+          </p>
           <p className="profile__response-error">{isError && text}</p>
           {isLoading && <Preloader />}
           {isShowSaveButton && !isLoading && (

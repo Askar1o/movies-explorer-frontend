@@ -30,6 +30,7 @@ function App() {
   const [apiService, setApiService] = useState({});
   const [movies, setMovies] = useState([]);
   const [savedMovies, setSavedMovies] = useState([]);
+  const [isSuccessMessageShow, setSuccessMessageShow] = useState(false);
 
   useEffect(() => {
     if (
@@ -130,8 +131,14 @@ function App() {
       .finally(() => disableLoader());
   };
 
+  const showSuccessMessage = () => {
+    setSuccessMessageShow(true);
+    setTimeout(() => setSuccessMessageShow(false), 2000);
+  };
+
   const handleChangeProfile = ({ name, email }) => {
     enableLoader();
+    setSuccessMessageShow(false);
     api
       .setUserInfo({ name, email })
       .then((userData) => {
@@ -140,10 +147,11 @@ function App() {
           name: userData.data.name,
           email: userData.data.email,
         });
-        setApiService((past) => ({
+        showSuccessMessage();
+        /*setApiService((past) => ({
           ...past,
           successText: `Данные обновлены.`,
-        }));
+        }));*/
       })
       .catch((err) => handleError(err))
       .finally(() => disableLoader());
@@ -228,6 +236,7 @@ function App() {
                     <Profile
                       onLogout={handleLogout}
                       onSubmit={handleChangeProfile}
+                      isSuccessMessageShow={isSuccessMessageShow}
                     />
                   }
                 />
