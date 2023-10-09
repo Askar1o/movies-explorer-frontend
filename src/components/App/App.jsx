@@ -131,11 +131,6 @@ function App() {
       .finally(() => disableLoader());
   };
 
-  const showSuccessMessage = () => {
-    setSuccessMessageShow(true);
-    setTimeout(() => setSuccessMessageShow(false), 2000);
-  };
-
   const handleChangeProfile = ({ name, email }) => {
     enableLoader();
     setSuccessMessageShow(false);
@@ -147,7 +142,7 @@ function App() {
           name: userData.data.name,
           email: userData.data.email,
         });
-        showSuccessMessage();
+        setSuccessMessageShow(true);
         /*setApiService((past) => ({
           ...past,
           successText: `Данные обновлены.`,

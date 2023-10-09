@@ -93,9 +93,11 @@ function Profile({ onLogout, onSubmit, isSuccessMessageShow }) {
             />
           </label>
           <span className="profile__span-error">{errors.email}</span>
-          <p className="profile__success-message">
-            {isSuccessMessageShow && "Данные обновлены!"}
-          </p>
+          {isSuccessMessageShow ? (
+            <p className="profile__success-message">Данные обновлены!</p>
+          ) : (
+            ""
+          )}
           <p className="profile__response-error">{isError && text}</p>
           {isLoading && <Preloader />}
           {isShowSaveButton && !isLoading && (
