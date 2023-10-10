@@ -86,9 +86,7 @@ function MovieList({ movies, savedMovies, isLoading, text, onSave, onDelete }) {
           />
         );
       });
-    } /*else {
-      return text;
-    }*/
+    }
   };
 
   return (
