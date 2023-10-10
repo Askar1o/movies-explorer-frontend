@@ -20,11 +20,11 @@ function Profile({ onLogout, onSubmit, isSuccess, setSuccess }) {
   const { isLoading, isError, text } = useContext(ApiServiceContext);
   const [isShowSaveButton, setShowSaveButton] = useState(false);
 
-  useEffect(() => {
+  /*useEffect(() => {
     if (pathname === "/profile") {
       setSuccess(false);
     }
-  }, [setSuccess, pathname]);
+  }, [setSuccess, pathname]);*/
 
   useEffect(() => {
     setValues((data) => ({
