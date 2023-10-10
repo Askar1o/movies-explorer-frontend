@@ -105,7 +105,7 @@ function Profile({ onLogout, onSubmit, isSuccess, setSuccess }) {
             className={`profile__response-error ${
               isError
                 ? "profile__response-error_type_error"
-                : isSuccess && "profile__response-error_type_success"
+                : "profile__response-error_type_success"
             }`}
           >
             {isError ? text : "Данные обновлены!"}
