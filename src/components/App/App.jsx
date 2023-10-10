@@ -5,7 +5,7 @@ import Main from "../Main/Main";
 import SavedMovies from "../SavedMovies/SavedMovies";
 import Register from "../Register/Register";
 import Login from "../Login/Login";
-import { useState, useEffect, Suspense } from "react";
+import { useState, useEffect, Suspense, useCallback } from "react";
 import Profile from "../Profile/Profile";
 import NotFound from "../NotFound/NotFound";
 import {
@@ -30,6 +30,7 @@ function App() {
   const [apiService, setApiService] = useState({});
   const [movies, setMovies] = useState([]);
   const [savedMovies, setSavedMovies] = useState([]);
+  const [isSuccess, setIsSuccess] = useState(false);
 
   useEffect(() => {
     if (
@@ -130,6 +131,10 @@ function App() {
       .finally(() => disableLoader());
   };
 
+  const setSuccess = useCallback(() => {
+    setIsSuccess(false);
+  }, []);
+
   const handleChangeProfile = ({ name, email }) => {
     enableLoader();
     api
@@ -140,6 +145,7 @@ function App() {
           name: userData.data.name,
           email: userData.data.email,
         });
+        setIsSuccess(true);
         /*setApiService((past) => ({
           ...past,
           successText: `Данные обновлены.`,
@@ -228,6 +234,8 @@ function App() {
                     <Profile
                       onLogout={handleLogout}
                       onSubmit={handleChangeProfile}
+                      isSuccess={isSuccess}
+                      setSuccess={setSuccess}
                     />
                   }
                 />
