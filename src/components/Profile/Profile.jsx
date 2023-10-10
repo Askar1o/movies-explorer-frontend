@@ -20,11 +20,11 @@ function Profile({ onLogout, onSubmit, isSuccess, setSuccess }) {
   const { isLoading, isError, text } = useContext(ApiServiceContext);
   const [isShowSaveButton, setShowSaveButton] = useState(false);
 
-  /*useEffect(() => {
+  useEffect(() => {
     if (pathname === "/profile") {
       setSuccess(false);
     }
-  }, [setSuccess, pathname]);*/
+  }, [setSuccess, pathname]);
 
   useEffect(() => {
     setValues((data) => ({
@@ -101,14 +101,8 @@ function Profile({ onLogout, onSubmit, isSuccess, setSuccess }) {
             />
           </label>
           <span className="profile__span-error">{errors.email}</span>
-          <p
-            className={`profile__response-error ${
-              isError
-                ? "profile__response-error_type_error"
-                : isSuccess && "profile__response-error_type_success"
-            }`}
-          >
-            {isError ? text : "Данные обновлены!"}
+          <p className="profile__response-error">
+            {isError ? text : isSuccess && "Данные обновлены!"}
           </p>
           {isLoading && <Preloader />}
           {isShowSaveButton && !isLoading && (
