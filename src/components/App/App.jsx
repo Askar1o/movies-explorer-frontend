@@ -143,7 +143,7 @@ function App() {
         setApiService((past) => ({
           ...past,
           isError: false,
-//          successText: `Данные обновлены.`,
+          successText: `Данные обновлены.`,
         }));
       })
       .catch((err) => handleError(err))

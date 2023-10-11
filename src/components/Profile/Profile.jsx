@@ -15,7 +15,7 @@ function Profile({ onLogout, onSubmit }) {
       email: currentUser.email,
     });
 
-  const { isLoading, isError, text, isSuccessText, successText } =
+  const { isLoading, isError, text, successText } =
     useContext(ApiServiceContext);
   const [isShowSaveButton, setShowSaveButton] = useState(false);
 
