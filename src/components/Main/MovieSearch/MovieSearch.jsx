@@ -30,10 +30,10 @@ function MovieSearch({ onSubmit, isLoading, onError, filterOnEmptySearch }) {
   };
 
   const handleChangeCheckbox = (e) => {
-    /*if (!searchQuery.searchString.trim()) {
+    if (!searchQuery.searchString.trim()) {
       onError();
       return setSearchQuery({ ...searchQuery, searchString: "" });
-    }*/
+    }
     setSearchQuery({ ...searchQuery, isShortMovie: e.target.checked });
     onSubmit(searchQuery);
     //onSubmit({ ...searchQuery, isShortMovie: e.target.checked });
@@ -43,7 +43,7 @@ function MovieSearch({ onSubmit, isLoading, onError, filterOnEmptySearch }) {
     e.preventDefault();
     if (!searchQuery.searchString.trim() && !filterOnEmptySearch) {
       onError();
-      return /*setSearchQuery({ ...searchQuery, searchString: "" })*/;
+      return setSearchQuery({ ...searchQuery, searchString: "" });
     }
     onSubmit(searchQuery);
   };
