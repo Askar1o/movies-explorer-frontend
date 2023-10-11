@@ -30,7 +30,6 @@ function App() {
   const [apiService, setApiService] = useState({});
   const [movies, setMovies] = useState([]);
   const [savedMovies, setSavedMovies] = useState([]);
-  const [isSuccess, setIsSuccess] = useState(false);
 
   useEffect(() => {
     if (
@@ -131,10 +130,6 @@ function App() {
       .finally(() => disableLoader());
   };
 
-  const setSuccess = useCallback(() => {
-    setIsSuccess(false);
-  }, []);
-
   const handleChangeProfile = ({ name, email }) => {
     enableLoader();
     api
@@ -145,11 +140,11 @@ function App() {
           name: userData.data.name,
           email: userData.data.email,
         });
-        setIsSuccess(true);
-        /*setApiService((past) => ({
+        setApiService((past) => ({
           ...past,
-          successText: `Данные обновлены.`,
-        }));*/
+          isError: false,
+//          successText: `Данные обновлены.`,
+        }));
       })
       .catch((err) => handleError(err))
       .finally(() => disableLoader());
@@ -234,8 +229,6 @@ function App() {
                     <Profile
                       onLogout={handleLogout}
                       onSubmit={handleChangeProfile}
-                      isSuccess={isSuccess}
-                      setSuccess={setSuccess}
                     />
                   }
                 />

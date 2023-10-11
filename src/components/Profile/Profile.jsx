@@ -5,10 +5,8 @@ import useFormAndValidation from "../../hooks/FormValidation/useFormValidation";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext/CurrentUserContext";
 import { ApiServiceContext } from "../../contexts/ApiServiceContext/ApiServiceContext";
 import Preloader from "../Preloader/Preloader";
-import { useLocation } from "react-router-dom";
 
-function Profile({ onLogout, onSubmit, isSuccess, setSuccess }) {
-  const pathname = useLocation();
+function Profile({ onLogout, onSubmit }) {
   const currentUser = useContext(CurrentUserContext);
 
   const { values, errors, isValid, handleChange, setValues, setValid } =
@@ -17,14 +15,9 @@ function Profile({ onLogout, onSubmit, isSuccess, setSuccess }) {
       email: currentUser.email,
     });
 
-  const { isLoading, isError, text } = useContext(ApiServiceContext);
+  const { isLoading, isError, text, isSuccessText, successText } =
+    useContext(ApiServiceContext);
   const [isShowSaveButton, setShowSaveButton] = useState(false);
-
-  useEffect(() => {
-    if (pathname === "/profile") {
-      setSuccess(false);
-    }
-  }, [setSuccess, pathname]);
 
   useEffect(() => {
     setValues((data) => ({
@@ -102,7 +95,7 @@ function Profile({ onLogout, onSubmit, isSuccess, setSuccess }) {
           </label>
           <span className="profile__span-error">{errors.email}</span>
           <p className="profile__response-error">
-            {isError ? text : isSuccess && "Данные обновлены!"}
+            {isError ? text : "Данные обновлены!"}
           </p>
           {isLoading && <Preloader />}
           {isShowSaveButton && !isLoading && (
