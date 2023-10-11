@@ -15,7 +15,11 @@ function SavedMovies({ movies, onDelete, onError }) {
     <>
       <Header />
       <main>
-        <MovieSearch onSubmit={handleSearch} onError={onError} />
+        <MovieSearch
+          onSubmit={handleSearch}
+          onError={onError}
+          filterOnEmptySearch={true}
+        />
         <MovieList
           movies={sortedMovies}
           savedMovies={sortedMovies}
