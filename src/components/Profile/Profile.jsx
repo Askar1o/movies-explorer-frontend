@@ -95,7 +95,7 @@ function Profile({ onLogout, onSubmit }) {
           </label>
           <span className="profile__span-error">{errors.email}</span>
           <p className="profile__response-error">
-            {isError ? text : "Данные обновлены!"}
+            {isError ? text : successText}
           </p>
           {isLoading && <Preloader />}
           {isShowSaveButton && !isLoading && (
