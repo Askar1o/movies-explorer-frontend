@@ -65,6 +65,7 @@ export function useSearchFilms({ movies, isSavedPage, isMoviesPage }) {
     setLoading(true);
 
     let data;
+
     if (searchQuery.isShortMovie) {
       data = movies.filter((movie) => movie.duration <= 40);
     } else if (searchQuery.searchString) {
@@ -73,21 +74,7 @@ export function useSearchFilms({ movies, isSavedPage, isMoviesPage }) {
       data = movies;
     }
 
-    if (isSavedPage && !searchQuery.searchString && searchQuery.isShortMovie) {
-      setText("");
-      setSortedMovies(data);
-    }
-
-    if (isMoviesPage && searchQuery.searchString && !searchQuery.isShortMovie) {
-      setText("Введите название фильма");
-      setSortedMovies([]);
-    }
-
-    if (data.length === 0) {
-      setText("Ничего не найдено");
-    }
-
-    setTimeout(() => setLoading(false), 300);
+    setSortedMovies(data);
 
     if (isMoviesPage) {
       localStorage.setItem(
@@ -99,6 +86,20 @@ export function useSearchFilms({ movies, isSavedPage, isMoviesPage }) {
         })
       );
     }
+
+    if (data.length === 0) {
+      setText("Ничего не найдено");
+    }
+
+    if (!searchQuery.searchString && !searchQuery.isShortMovie) {
+      setText("Введите название фильма");
+    }
+
+    if (isSavedPage && !searchQuery.searchString && searchQuery.isShortMovie) {
+      setText("");
+    }
+
+    setTimeout(() => setLoading(false), 300);
   };
 
   return { sortedMovies, handleSearch, isLoading, text };
