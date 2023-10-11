@@ -21,6 +21,7 @@ function Main({ movies, savedMovies, onSave, onDelete, onError }) {
           onSubmit={handleSearch}
           isLoading={isLoading}
           onError={onError}
+          isSavedMoviesView={false}
         />
         <MovieList
           movies={sortedMovies}
