@@ -64,6 +64,15 @@
   line-height: 12px;
 }
 
+.profile__response-success {
+  padding: 0;
+  margin: 0;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 13px;
+  text-align: center;
+}
+
 .profile__response-error {
   color: #ee3465;
   padding: 0;
