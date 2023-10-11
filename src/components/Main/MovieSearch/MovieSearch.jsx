@@ -3,14 +3,14 @@ import { useLocation } from "react-router-dom";
 import "./MovieSearch.css";
 import { LOCAL_STORAGE_LAST_SEARCH_QUERY } from "../../../utils/constant";
 
-function MovieSearch({ onSubmit, isLoading, onError, filterOnEmptySearch }) {
+function MovieSearch({ onSubmit, isLoading, onError }) {
   const location = useLocation();
   const [searchQuery, setSearchQuery] = useState({
     searchString: "",
     isShortMovie: false,
   });
 
-  /*useEffect(() => {
+  useEffect(() => {
     if (
       location.pathname === "/movies" &&
       localStorage.getItem(LOCAL_STORAGE_LAST_SEARCH_QUERY)
@@ -23,27 +23,26 @@ function MovieSearch({ onSubmit, isLoading, onError, filterOnEmptySearch }) {
         isShortMovie,
       });
     }
-  }, [location]);*/
+  }, [location]);
 
   const handleChange = (e) => {
     setSearchQuery({ ...searchQuery, searchString: e.target.value });
   };
 
   const handleChangeCheckbox = (e) => {
-    /*if (!searchQuery.searchString.trim()) {
+    if (!searchQuery.searchString.trim()) {
       onError();
       return setSearchQuery({ ...searchQuery, searchString: "" });
-    }*/
+    }
     setSearchQuery({ ...searchQuery, isShortMovie: e.target.checked });
-    onSubmit(searchQuery);
-    //onSubmit({ ...searchQuery, isShortMovie: e.target.checked });
+    onSubmit({ ...searchQuery, isShortMovie: e.target.checked });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!searchQuery.searchString.trim() && !filterOnEmptySearch) {
+    if (!searchQuery.searchString.trim()) {
       onError();
-      return /*setSearchQuery({ ...searchQuery, searchString: "" })*/;
+      return setSearchQuery({ ...searchQuery, searchString: "" });
     }
     onSubmit(searchQuery);
   };
@@ -69,10 +68,7 @@ function MovieSearch({ onSubmit, isLoading, onError, filterOnEmptySearch }) {
             className="search__checkbox-input"
             name="isShortMovie"
             onChange={handleChangeCheckbox}
-            disabled={
-              isLoading ||
-              (!searchQuery.searchString.trim() && !filterOnEmptySearch)
-            }
+            disabled={isLoading}
             checked={searchQuery.isShortMovie}
           />
           <span className="search__checkbox-span"></span>
