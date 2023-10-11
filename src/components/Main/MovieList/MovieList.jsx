@@ -37,7 +37,7 @@ function MovieList({ movies, savedMovies, isLoading, text, onSave, onDelete }) {
         setForFilmsRender[device].addedRender * page
     );
 
-    if (movies.length >= renderCount) {
+    if (renderCount >= movies.length) {
       setShowMoreFilmsButton(false);
     } else {
       setShowMoreFilmsButton(true);
