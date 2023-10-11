@@ -32,7 +32,7 @@ export function useSearchFilms({ movies, isSavedPage, isMoviesPage }) {
     }
   }, [isMoviesPage, lastSearchQuery]);
 
-  const handleSearch = (searchQuery) => {
+  /*const handleSearch = (searchQuery) => {
     setLoading(true);
 
     const data = createData(movies, searchQuery);
@@ -45,6 +45,46 @@ export function useSearchFilms({ movies, isSavedPage, isMoviesPage }) {
     if (!searchQuery.searchString) {
       setText("Введите название фильма");
       setSortedMovies([]);
+    }
+
+    setTimeout(() => setLoading(false), 300);
+
+    if (isMoviesPage) {
+      localStorage.setItem(
+        LOCAL_STORAGE_LAST_SEARCH_QUERY,
+        JSON.stringify({
+          searchString: searchQuery.searchString,
+          isShortMovie: searchQuery.isShortMovie,
+          data: data,
+        })
+      );
+    }
+  };*/
+
+  const handleSearch = (searchQuery) => {
+    setLoading(true);
+
+    let data;
+    if (searchQuery.isShortMovie) {
+      data = movies.filter((movie) => movie.duration <= 40);
+    } else if (searchQuery.searchString) {
+      data = createData(movies, searchQuery);
+    } else {
+      data = movies;
+    }
+
+    if (isSavedPage && !searchQuery.searchString && searchQuery.isShortMovie) {
+      setText("");
+      setSortedMovies(data);
+    }
+
+    if (isMoviesPage && searchQuery.searchString && !searchQuery.isShortMovie) {
+      setText("Введите название фильма");
+      setSortedMovies([]);
+    }
+
+    if (data.length === 0) {
+      setText("Ничего не найдено");
     }
 
     setTimeout(() => setLoading(false), 300);
