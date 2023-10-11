@@ -30,19 +30,19 @@ function MovieSearch({ onSubmit, isLoading, onError }) {
   };
 
   const handleChangeCheckbox = (e) => {
-    if (!searchQuery.searchString.trim()) {
+    /*if (!searchQuery.searchString.trim()) {
       onError();
       return setSearchQuery({ ...searchQuery, searchString: "" });
-    }
+    }*/
     setSearchQuery({ ...searchQuery, isShortMovie: e.target.checked });
-    onSubmit({ ...searchQuery, isShortMovie: e.target.checked });
+    //onSubmit({ ...searchQuery, isShortMovie: e.target.checked });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!searchQuery.searchString.trim()) {
       onError();
-      return setSearchQuery({ ...searchQuery, searchString: "" });
+      return /*setSearchQuery({ ...searchQuery, searchString: "" })*/;
     }
     onSubmit(searchQuery);
   };
@@ -68,7 +68,7 @@ function MovieSearch({ onSubmit, isLoading, onError }) {
             className="search__checkbox-input"
             name="isShortMovie"
             onChange={handleChangeCheckbox}
-            disabled={isLoading}
+            disabled={isLoading || !searchQuery.searchString.trim()}
             checked={searchQuery.isShortMovie}
           />
           <span className="search__checkbox-span"></span>
