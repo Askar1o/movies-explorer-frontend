@@ -30,13 +30,12 @@ function MovieSearch({ onSubmit, isLoading, onError }) {
   };
 
   const handleChangeCheckbox = (e) => {
-    /*if (!searchQuery.searchString.trim()) {
+    if (!searchQuery.searchString.trim()) {
       onError();
       return setSearchQuery({ ...searchQuery, searchString: "" });
-    }*/
+    }
     setSearchQuery({ ...searchQuery, isShortMovie: e.target.checked });
-    //  onSubmit({ ...searchQuery, isShortMovie: e.target.checked });
-    onSubmit(searchQuery);
+    onSubmit({ ...searchQuery, isShortMovie: e.target.checked });
   };
 
   const handleSubmit = (e) => {
