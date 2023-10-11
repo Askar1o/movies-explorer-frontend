@@ -35,7 +35,7 @@ function MovieSearch({ onSubmit, isLoading, onError }) {
       return setSearchQuery({ ...searchQuery, searchString: "" });
     }
     setSearchQuery({ ...searchQuery, isShortMovie: e.target.checked });
-    onSubmit({ ...searchQuery /*, isShortMovie: e.target.checked */ });
+    onSubmit({ ...searchQuery, isShortMovie: e.target.checked });
   };
 
   const handleSubmit = (e) => {
