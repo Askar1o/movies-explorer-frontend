@@ -68,10 +68,14 @@ export function useSearchFilms({ movies, isSavedPage, isMoviesPage }) {
 
     if (searchQuery.isShortMovie) {
       data = movies.filter((movie) => movie.duration <= 40);
-    } else if (searchQuery.searchString) {
+    } /*else if (searchQuery.searchString) {
       data = createData(movies, searchQuery);
-    } else {
+    }*/ else {
       data = movies;
+    }
+
+    if (searchQuery.searchString) {
+      data = createData(data, searchQuery);
     }
 
     setSortedMovies(data);
