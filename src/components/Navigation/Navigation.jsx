@@ -5,12 +5,14 @@ import NavigationPromo from "./NavigationPromo/NavigationPromo";
 import NavigationMovies from "./NavigationMovies/NavigationMovies";
 import { DeviceContext } from "../../contexts/DeviceContext/DeviceContext";
 import BurgerMenu from "./BurgerMenu/BurgerMenu";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext/CurrentUserContext";
 
 function Navigation() {
   const location = useLocation();
   const device = useContext(DeviceContext);
   const [menuActive, setMenuActive] = useState(false);
   const [isDesktop, setDesktop] = useState(true);
+  const { isLoggedIn } = useContext(CurrentUserContext);
 
   const toggleMenu = () => {
     setMenuActive(!menuActive);
@@ -27,7 +29,7 @@ function Navigation() {
 
   return (
     <>
-      {location.pathname === "/" ? (
+      {location.pathname === "/" && !isLoggedIn ? (
         <NavigationPromo />
       ) : (
         <>

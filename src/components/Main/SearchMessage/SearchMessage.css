@@ -1,0 +1,9 @@
+.movies__search-container {
+  display: flex;
+  justify-content: center;
+}
+
+.movies__search-text {
+  font-weight: 400;
+  font-size: 18px;
+}

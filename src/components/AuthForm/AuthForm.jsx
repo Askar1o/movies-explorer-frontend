@@ -8,11 +8,14 @@ function AuthForm({ onLogin, onRegister, isRegForm }) {
   const { values, errors, isValid, handleChange, resetForm } =
     useFormAndValidation();
   const [serverResError, setServerResError] = useState(false);
+  const { name, email, password } = values;
 
   const handleSubmit = (e) => {
     e.preventDefault();
     resetForm();
-    isRegForm ? onRegister() : onLogin();
+    isRegForm
+      ? onRegister({ email, password, name })
+      : onLogin({ email, password });
   };
 
   return (
@@ -34,6 +37,7 @@ function AuthForm({ onLogin, onRegister, isRegForm }) {
         handleChange={handleChange}
         values={values}
         errors={errors}
+        pattern={"^[A-Za-z0-9\\._%\\+\\-]+@([A-Za-z0-9\\-]+\\.)+[A-Za-z]{2,}$"}
       />
       <Label
         title="Пароль"

@@ -1,25 +1,51 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./Profile.css";
 import Header from "../Header/Header";
 import useFormAndValidation from "../../hooks/FormValidation/useFormValidation";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext/CurrentUserContext";
+import { ApiServiceContext } from "../../contexts/ApiServiceContext/ApiServiceContext";
+import Preloader from "../Preloader/Preloader";
 
-function Profile({ onLogout }) {
-  const [currentUser, setCurrentUser] = useState({
-    name: "Виталий",
-    email: "pochta@yandex.ru",
-  });
+function Profile({ onLogout, onSubmit }) {
+  const currentUser = useContext(CurrentUserContext);
 
-  const { values, errors, isValid, handleChange } = useFormAndValidation({
-    name: currentUser.name,
-    email: currentUser.email,
-  });
+  const { values, errors, isValid, handleChange, setValues, setValid } =
+    useFormAndValidation({
+      name: currentUser.name,
+      email: currentUser.email,
+    });
 
-  const [serverResError, setServerResError] = useState(false);
+  const { isLoading, isError, text, successText } =
+    useContext(ApiServiceContext);
   const [isShowSaveButton, setShowSaveButton] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
+
+  useEffect(() => {
+    setValues((data) => ({
+      ...data,
+      name: currentUser.name,
+      email: currentUser.email,
+    }));
+  }, [currentUser, setValues]);
+
+  useEffect(() => {
+    if (
+      currentUser.name === values.name &&
+      currentUser.email === values.email
+    ) {
+      setValid(false);
+    }
+  }, [currentUser, values, setValid]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setServerResError(true);
+    onSubmit({ name: values.name, email: values.email });
+    if (errors && isError) {
+      setShowSaveButton(true);
+    } else {
+      setShowSaveButton(false);
+      setSuccessMessage("Данные обновлены!");
+    }
   };
 
   const handleEditButtonClick = () => {
@@ -31,7 +57,12 @@ function Profile({ onLogout }) {
       <Header />
       <section className="profile">
         <h2 className="profile__title">Привет, {currentUser.name}!</h2>
-        <form className="profile__form" name="profile" onSubmit={handleSubmit}>
+        <form
+          className="profile__form"
+          name="profile"
+          onSubmit={handleSubmit}
+          noValidate
+        >
           <label className="profile__label">
             <span className="profile__input-title">Имя</span>
             <input
@@ -43,6 +74,7 @@ function Profile({ onLogout }) {
               value={values.name}
               minLength={2}
               maxLength={30}
+              disabled={isLoading}
               required
             />
           </label>
@@ -56,14 +88,20 @@ function Profile({ onLogout }) {
               onChange={handleChange}
               onFocus={handleEditButtonClick}
               value={values.email}
+              disabled={isLoading}
+              pattern={
+                "^[A-Za-z0-9\\._%\\+\\-]+@([A-Za-z0-9\\-]+\\.)+[A-Za-z]{2,}$"
+              }
               required
             />
           </label>
           <span className="profile__span-error">{errors.email}</span>
+          <p className="profile__response-success">{successMessage}</p>
           <p className="profile__response-error">
-            {serverResError && "При обновлении профиля произошла ошибка."}
+            {isError ? text : successText}
           </p>
-          {isShowSaveButton ? (
+          {isLoading && <Preloader />}
+          {isShowSaveButton && !isLoading && (
             <button
               type="submit"
               className="profile__button profile__button_type_submit"
@@ -71,7 +109,8 @@ function Profile({ onLogout }) {
             >
               Сохранить
             </button>
-          ) : (
+          )}
+          {!isShowSaveButton && !isLoading && (
             <>
               <button
                 type="button"
